@@ -34,11 +34,15 @@ public class StringUtil
     // Ejemplo lpad("5",3,'0') ==> "005"
     public static String lpad(String s, int n, char c)
     {
-        String zeros="";
-        String aux="";
-        zeros= replicate(c,n-s.length());
-        aux=zeros+s;
-        return aux;
+       if(s.length()<n){
+           String zeros="";
+           String aux="";
+           zeros= replicate(c,n-s.length());
+           aux=zeros+s;
+           return aux;
+       }
+       return s;
+
     }
 
     // Retorna un String[] conteniendo los elementos de arr
@@ -87,8 +91,8 @@ public class StringUtil
         String aux="";
         for (int i=0; i<array.length; i++){
             if (array[i].length()<maxLen){
-                aux=lpad(array[i],maxLen,c);
-                array[i]=aux;
+                array[i]=lpad(array[i],maxLen,c);
+
             }
         }
     }

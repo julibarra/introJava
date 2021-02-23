@@ -22,47 +22,52 @@ public class RadixSort {
 
         StringUtil.lNormalize(string,'0');
 
+        HashMap<Integer, ArrayList<String>> listas=new HashMap<>();
         int max=StringUtil.maxLength(string);
+        instancesArrayListHashMap(listas);
         //String[] aux= new String[string.length];
-
+/*
         for (int i= max; i>0; i--){
-            HashMap<Integer, ArrayList<String>> listas = getIntegerArrayListHashMap();
+            //HashMap<Integer, ArrayList<String>> listas = getIntegerArrayListHashMap();
             addToList(string,listas,i);
 
             string=listsToArray(listas);
         }
         array=StringUtil.toIntArray(string);
+*/
+        for (int i=0; i<string[0].length(); i++){//recorre la longitud de la cadena
+            for (String let:  string){
+                char [] elem=let.toCharArray();
+                int pos=Integer.parseInt(String.valueOf(elem[elem.length-1]));
+                listas.get(pos).add(let);
+            }
+            int cont=0;
 
-
-    }
-
-    private static String[] listsToArray( HashMap<Integer, ArrayList<String>> listas){
-        ArrayList<String> aux=new ArrayList<>();
-        for (int i=0; i<10; i++){
-            if (!listas.get(i).isEmpty()){
-                for (int j=0 ; j<listas.get(i).size(); j++){
-                    aux.add(listas.get(i).get(j));
-
+            for (int k=0 ; k<listas.keySet().size(); k++){
+                for (String let: listas.get(k)){
+                    string[cont]=let;
+                    cont++;
                 }
+                listas.get(k).clear();
             }
         }
-        return aux.toArray(new String[0]);
+     for (int i=0; i<string.length; i++){
+         array[i]=Integer.parseInt(string[i]);
+     }
+
+
     }
 
 
-    private static HashMap<Integer, ArrayList<String>> getIntegerArrayListHashMap() {
-        HashMap<Integer, ArrayList<String>> listas= new HashMap();
+
+    private static void instancesArrayListHashMap(HashMap<Integer, ArrayList<String>> listas) {
+       // HashMap<Integer, ArrayList<String>> listas= new HashMap();
         for (int i=0; i<10; i++){
             listas.put(i, new ArrayList<>());
         }
-        return listas;
+
     }
 
-    static void addToList(String[] array,HashMap<Integer, ArrayList<String>> listas,int  index){
-        for (int i=0; i<array.length; i++){
-            int pos= Integer.parseInt(String.valueOf(array[i].charAt(index-1)));
-            listas.get(pos).add(array[i]);
-        }
-    }
+
 
 }
